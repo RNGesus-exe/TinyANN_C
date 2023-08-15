@@ -56,6 +56,8 @@ enum HiddenLayerAttribute { _operation, _stride, _padding, _kernel_size, _activa
 
 enum Operations { _convolution = 1, _maxpool, _flatten, _fully_connected };
 
+enum Activations { _relu = 1 };
+
 typedef struct MemoryRegion {
     size_t size;
     float* memory_start;
@@ -97,7 +99,17 @@ int initNetwork(TinyANN* tinyANN, const char* network_config_path, const char* p
 
 int loadParams(TinyANN* tinyANN, const char* param_path);
 
-void inference(TinyANN* tinyANN, float* image);
+void convolution(TinyANN* tinyANN, size_t layer_no);
+
+void max_pool(TinyANN* tinyANN, size_t layer_no);
+
+void relu(TinyANN* tinyANN, size_t layer_no);
+
+void flatten(TinyANN* tinyANN, size_t layer_no);
+
+void fully_connected(TinyANN* tinyANN, size_t layer_no);
+
+int inference(TinyANN* tinyANN, float* image);
 
 int destroyNetwork(TinyANN* tinyANN);
 
